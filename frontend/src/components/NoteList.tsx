@@ -4,6 +4,7 @@ import { Button, Label, Modal, TextInput } from "flowbite-react";
 // This is how you can import services
 import { deleteNote, getNotes, updateNote } from '../services/note';
 import NoteForm from './NoteForm';
+import Navbar from './Navbar';
 
 export interface Note {
   id: number;
@@ -31,7 +32,7 @@ const NoteList: React.FC = () => {
     setOpenModal(false);
     setContent('');
     setSelectedNote({
-      id:null, content: ''
+      id: null, content: ''
     })
   };
 
@@ -46,13 +47,14 @@ const NoteList: React.FC = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSelectedNote({
       ...selectedNote,
-      content:event.target.value
+      content: event.target.value
     });
   };
 
   const fetchNotes = async (): Promise<void> => {
     try {
-      const response = await getNotes();
+      const userId = localStorage.getItem('userId');
+      const response = await getNotes(userId);
       setNotes(response.data);
     } catch (error) {
       console.error('Error fetching notes:', error);
@@ -83,6 +85,7 @@ const NoteList: React.FC = () => {
 
   return (
     <>
+      <Navbar />
       <NoteForm refresh={refresh} />
       <div className='container mx-auto'>
         <div className='mt-10'>

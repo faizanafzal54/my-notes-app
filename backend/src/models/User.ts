@@ -20,7 +20,7 @@ export class User extends Model<UserAttributes> implements UserAttributes {
   static initModel(sequelize: Sequelize): typeof User {
     User.init({
       id: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },

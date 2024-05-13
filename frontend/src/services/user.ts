@@ -1,7 +1,9 @@
 import axios from "axios";
 import { SignupType } from "../components/Signup";
 import { SigninPayload } from "../components/Signin";
-const BASE_URL: string = 'http://localhost:3001/api/';
+
+// get the env variable from .env file 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // Services of User APIs
 
